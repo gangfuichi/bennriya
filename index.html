@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>便利屋サポート｜オンライン作業代行・リサーチ・自動化</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="オンラインで完結する便利屋サービス。PC作業代行・リサーチ・軽い自動化・SNS運用など、初期費用を抑えたサポートを行います。">
+  <style>
+    :root {
+      --bg: #0f172a;
+      --bg-alt: #020617;
+      --card-bg: #0b1220;
+      --accent: #22c55e;
+      --accent-soft: rgba(34,197,94,0.1);
+      --accent-strong: #16a34a;
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --border: #1f2937;
+      --danger: #f97316;
+      --danger-soft: rgba(249,115,22,0.08);
+      --font: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: var(--font);
+      background: radial-gradient(circle at top, #1e293b 0, #020617 50%, #020617 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 24px 16px 64px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .logo {
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .tagline {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    section {
+      background: linear-gradient(135deg, rgba(15,23,42,0.95), rgba(15,23,42,0.8));
+      border-radius: 16px;
+      padding: 20px 18px;
+      border: 1px solid rgba(148,163,184,0.16);
+      box-shadow: 0 18px 45px rgba(15,23,42,0.8);
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.08), transparent 55%),
+        radial-gradient(circle at bottom right, rgba(34,197,94,0.08), transparent 55%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 11px;
+      color: var(--accent);
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(34,197,94,0.3);
+      margin-bottom: 10px;
+    }
+
+    .eyebrow-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(34,197,94,0.8);
+    }
+
+    h1 {
+      font-size: 24px;
+      margin: 0 0 8px;
+    }
+
+    @media (min-width: 720px) {
+      h1 {
+        font-size: 30px;
+      }
+    }
+
+    .hero-lead {
+      color: var(--text-muted);
+      margin-bottom: 16px;
+      font-size: 14px;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    @media (min-width: 720px) {
+      .hero-grid {
+        grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr);
+        align-items: stretch;
+      }
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .btn-primary {
+      border-radius: 999px;
+      padding: 9px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+      color: #0f172a;
+      box-shadow: 0 10px 30px rgba(34,197,94,0.5);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, filter 0.12s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.05);
+      box-shadow: 0 14px 40px rgba(34,197,94,0.7);
+    }
+
+    .btn-ghost {
+      border-radius: 999px;
+      padding: 8px 15px;
+      font-size: 13px;
+      border: 1px solid rgba(148,163,184,0.6);
+      color: var(--text-muted);
+      background: rgba(15,23,42,0.85);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15,23,42,1);
+      border-color: rgba(248,250,252,0.7);
+      color: var(--text);
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .hero-meta span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.85);
+      border: 1px solid rgba(30,64,175,0.8);
+    }
+
+    .pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #38bdf8;
+    }
+
+    .hero-card {
+      border-radius: 14px;
+      border: 1px solid rgba(148,163,184,0.28);
+      background: radial-gradient(circle at top left, rgba(56,189,248,0.18), transparent 55%),
+                  linear-gradient(145deg, rgba(15,23,42,0.96), rgba(15,23,42,0.9));
+      padding: 14px 13px;
+      font-size: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #93c5fd;
+    }
+
+    .hero-card-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .hero-card-item-title {
+      font-weight: 600;
+      font-size: 13px;
+    }
+
+    .badge-soft {
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 10px;
+      border: 1px solid rgba(34,197,94,0.5);
+      background: rgba(22,163,74,0.15);
+      color: #bbf7d0;
+      white-space: nowrap;
+    }
+
+    .badge-soft-orange {
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 10px;
+      border: 1px solid rgba(249,115,22,0.5);
+      background: rgba(249,115,22,0.12);
+      color: #fed7aa;
+      white-space: nowrap;
+    }
+
+    .hero-card-divider {
+      border-top: 1px dashed rgba(148,163,184,0.5);
+      margin: 4px 0 2px;
+    }
+
+    .hero-card-note {
+      font-size: 11px;
+      color: #cbd5f5;
+    }
+
+    .section-title {
+      font-size: 18px;
+      margin: 0 0 4px;
+    }
+
+    .section-subtitle {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .service-list {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      font-size: 13px;
+    }
+
+    @media (min-width: 720px) {
+      .service-list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .service-item {
+      border-radius: 12px;
+      padding: 10px 11px;
+      background: rgba(15,23,42,0.95);
+      border: 1px solid rgba(30,64,175,0.6);
+    }
+
+    .service-item-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+      font-size: 13px;
+    }
+
+    .service-item-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .section-footer-cta {
+      margin-top: 10px;
+      display: flex;
+      justify-content: flex-start;
+    }
+
+    .btn-inline {
+      font-size: 12px;
+      padding: 5px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.6);
+      background: rgba(15,23,42,0.85);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+
+    .btn-inline span.icon {
+      font-size: 13px;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      font-size: 13px;
+    }
+
+    @media (min-width: 720px) {
+      .grid-2 {
+        grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      }
+    }
+
+    .card-subtle {
+      border-radius: 12px;
+      padding: 9px 11px;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.98), rgba(15,23,42,0.9));
+      border: 1px dashed rgba(148,163,184,0.5);
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .badge-outline {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.7);
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .badge-outline span.icon {
+      font-size: 12px;
+    }
+
+    .list-check {
+      padding-left: 18px;
+      margin: 6px 0;
+    }
+
+    .list-check li {
+      margin-bottom: 3px;
+      font-size: 12px;
+    }
+
+    .list-check li::marker {
+      content: "・";
+      color: #93c5fd;
+    }
+
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    .price-table th,
+    .price-table td {
+      padding: 6px 7px;
+      border-bottom: 1px solid rgba(31,41,55,0.9);
+    }
+
+    .price-table th {
+      text-align: left;
+      color: var(--text-muted);
+      font-weight: 500;
+      font-size: 11px;
+    }
+
+    .price-label {
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .price-note {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .pill-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.9);
+      border: 1px solid rgba(148,163,184,0.6);
+      margin-top: 6px;
+    }
+
+    .pill-note span.icon {
+      font-size: 13px;
+    }
+
+    .cta-section {
+      text-align: center;
+      padding: 18px 14px;
+      background: radial-gradient(circle at top, rgba(22,163,74,0.1), rgba(15,23,42,0.95));
+      border: 1px solid rgba(34,197,94,0.6);
+    }
+
+    .cta-title {
+      font-size: 17px;
+      margin-bottom: 6px;
+    }
+
+    .cta-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    footer {
+      margin-top: 28px;
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+
+    .link-underline {
+      text-decoration: underline;
+      text-decoration-style: dotted;
+      text-underline-offset: 3px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div>
+        <div class="logo">UTILITY SUPPORT</div>
+        <div class="tagline">オンライン×小回りのきく便利屋</div>
+      </div>
+      <div class="tagline">まずはチャット感覚で相談OK</div>
+    </header>
+
+    <main>
+      <!-- ヒーローセクション -->
+      <section class="hero" id="top">
+        <div class="hero-inner">
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            小さな「めんどう」を、オンラインで片付ける
+          </div>
+          <h1>PC作業・リサーチ・ちょっとした自動化まで。<br>初期費用を抑えたオンライン便利屋です。</h1>
+          <p class="hero-lead">
+            「調べるのが面倒」「時間はないけど、やりたいことはある」。<br>
+            そんなときに、裏方で quietly 動いて片付けるタイプの便利屋です。<br>
+            まずは内容ベースで相談いただき、可能な範囲・金額感を一緒に決めていきます。
+          </p>
+
+          <div class="hero-grid">
+            <div>
+              <div class="hero-actions">
+                <!-- ▼ CTAボタン：ここにGoogleフォームやLINEなどのURLを入れる -->
+                <a href="#contact" class="btn-primary">
+                  <span>まずは無料で相談する</span>
+                  <span>→</span>
+                </a>
+                <a href="#services" class="btn-ghost">
+                  <span>できること一覧を見る</span>
+                </a>
+              </div>
+              <div class="hero-meta">
+                <span><span class="pill-dot"></span> 初回ヒアリング無料</span>
+                <span><span class="pill-dot"></span> 小さな依頼歓迎（1,000円〜）</span>
+                <span><span class="pill-dot"></span> チャット中心・オンライン完結</span>
+              </div>
+            </div>
+
+            <div class="hero-card">
+              <div class="hero-card-label">よくあるご相談</div>
+              <div class="hero-card-item">
+                <div>
+                  <div class="hero-card-item-title">PC作業を丸ごとお願いしたい</div>
+                  <div class="hero-card-note">
+                    エクセル整理、資料まとめ、テキスト書き起こしなど。<br>
+                    「ここからここまでお願いしたい」と指定いただくだけでOKです。
+                  </div>
+                </div>
+                <div class="badge-soft">3,000円〜</div>
+              </div>
+              <div class="hero-card-divider"></div>
+              <div class="hero-card-item">
+                <div>
+                  <div class="hero-card-item-title">最適なプラン・最安ルートを知りたい</div>
+                  <div class="hero-card-note">
+                    旅行・移動・サブスク・サービス比較など。<br>
+                    条件に合わせて候補をしぼり込み、メリット・デメリットまで整理してお渡しします。
+                  </div>
+                </div>
+                <div class="badge-soft-orange">リサーチ代行</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- サービス内容 -->
+      <section id="services">
+        <h2 class="section-title">提供しているサービス</h2>
+        <p class="section-subtitle">
+          「ざっくりとした依頼」でも大丈夫です。内容をうかがってから、できること・できないことを正直にお伝えします。
+        </p>
+
+        <div class="service-list">
+          <div class="service-item">
+            <div class="service-item-title">PC作業代行</div>
+            <div class="service-item-desc">
+              エクセルの整理・リスト作成・テキスト整形・フォルダ整理など、
+              「自分でやると時間だけかかる作業」をまるごとお任せいただけます。
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title">リサーチ・比較・最適化</div>
+            <div class="service-item-desc">
+              宿泊先・交通手段・サービス・ツールなどの比較検討を代行。
+              条件に合わせて候補をしぼり、要点だけわかるようにまとめます。
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title">軽い自動化・スクリプト作成</div>
+            <div class="service-item-desc">
+              Windows環境での簡易自動化（ショートカット、バッチ、簡単なスクリプト）など、
+              日々の作業を少しだけ楽にする仕組みづくりをお手伝いします。
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title">文章作成・リライト</div>
+            <div class="service-item-desc">
+              お知らせ文、説明文、SNS投稿文など、
+              「だいたいの内容はあるけど、うまくまとまらない」というテキストの整形・書き直しを行います。
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title">ホームページ・SNSまわりの軽作業</div>
+            <div class="service-item-desc">
+              既存サイトの文言変更、簡単なデザイン微調整、SNS投稿テンプレート作成など、
+              「ちょっとだけ直したい／整えたい」作業に対応します。
+            </div>
+          </div>
+          <div class="service-item">
+            <div class="service-item-title">その他、相談ベースのご依頼</div>
+            <div class="service-item-desc">
+              上記に当てはまらない内容でも、「これお願いできる？」という段階からお気軽にご相談ください。
+              守秘義務を前提に、可能な範囲をご提案します。
+            </div>
+          </div>
+        </div>
+
+        <div class="section-footer-cta">
+          <a href="#contact" class="btn-inline">
+            <span class="icon">✉</span>
+            <span>こんな依頼はできる？と聞いてみる</span>
+          </a>
+        </div>
+      </section>
+
+      <!-- 実績セクション -->
+      <section id="works">
+        <h2 class="section-title">これまでのお手伝い例</h2>
+        <p class="section-subtitle">
+          一部、具体的な内容をぼかしつつ掲載しています。雰囲気だけでも伝わればうれしいです。
+        </p>
+
+        <div class="grid-2">
+          <div class="card-subtle">
+            <div class="badge-outline">
+              <span class="icon">🖥</span>
+              PC作業代行・自動化まわり
+            </div>
+            <ul class="list-check">
+              <li>定型作業（ファイル整理・コピペ作業・入力作業）の代行・簡易自動化</li>
+              <li>よく使うツール・フォルダへのショートカット整理</li>
+              <li>Webサービスのデータをまとめるスプレッドシート作成</li>
+            </ul>
+          </div>
+          <div class="card-subtle">
+            <div class="badge-outline">
+              <span class="icon">🔎</span>
+              リサーチ・比較・プランニング
+            </div>
+            <ul class="list-check">
+              <li>宿泊先・交通手段の比較と「静かさ・費用」を重視したプラン提案</li>
+              <li>サブスク・サービスのプラン比較と、解約・乗り換えの整理</li>
+              <li>小さなビジネスのためのツール候補リストアップ</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card-subtle" style="margin-top:10px;">
+          <div class="badge-outline">
+            <span class="icon">✍</span>
+            テキスト・Webまわり
+          </div>
+          <ul class="list-check">
+            <li>お知らせ文・プロフィール文の整理・リライト</li>
+            <li>既存ホームページの微修正（文言・リンク・色味などの調整）</li>
+            <li>簡単なLP（1ページサイト）のたたき台作成</li>
+          </ul>
+          <p style="font-size:11px; color: var(--text-muted); margin-top:4px;">
+            ※ 公開可能な範囲のみを抜粋しています。詳細はお問い合わせ時に個別にお伝えします。
+          </p>
+        </div>
+      </section>
+
+      <!-- 料金の目安 -->
+      <section id="pricing">
+        <h2 class="section-title">料金の目安</h2>
+        <p class="section-subtitle">
+          内容やボリュームによって変動しますが、だいたいの目安は以下のとおりです。<br>
+          「この内容でどれくらいかかりそう？」というご相談だけでも歓迎です。
+        </p>
+
+        <table class="price-table">
+          <thead>
+          <tr>
+            <th>内容</th>
+            <th>目安</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td class="price-label">PC作業代行（軽作業）</td>
+            <td>1,000円〜 / 単発</td>
+          </tr>
+          <tr>
+            <td class="price-label">リサーチ・比較・最適化</td>
+            <td>2,000〜5,000円程度</td>
+          </tr>
+          <tr>
+            <td class="price-label">軽い自動化・スクリプト</td>
+            <td>3,000円〜（内容により応相談）</td>
+          </tr>
+          <tr>
+            <td class="price-label">文章作成・リライト</td>
+            <td>1,000〜3,000円程度</td>
+          </tr>
+          <tr>
+            <td class="price-label">ホームページ・SNSの微修正</td>
+            <td>1,000円〜</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <p class="price-note">
+          ・正式な金額は、内容・ボリューム・納期をうかがったうえでご提案します。<br>
+          ・「この予算でここまでお願いしたい」というご相談も大歓迎です。
+        </p>
+
+        <div class="pill-note">
+          <span class="icon">💬</span>
+          <span>まずは金額のことを気にせず、「こういうこと、頼める？」という段階からお気軽にどうぞ。</span>
+        </div>
+      </section>
+
+      <!-- お問い合わせ / CTA -->
+      <section id="contact" class="cta-section">
+        <div class="cta-title">まずは、軽い相談からはじめてみませんか？</div>
+        <div class="cta-text">
+          具体的にまとまっていなくても大丈夫です。<br>
+          「こんなことをお願いしたい」「これは頼める？」という一言からでも、お気軽にご連絡ください。
+        </div>
+
+        <div class="cta-actions">
+          <!-- ▼ ここを実際のフォームURLやLINEリンクに差し替える -->
+          <a href="https://example.com/form" class="btn-primary">
+            <span>お問い合わせフォームを開く</span>
+            <span>↗</span>
+          </a>
+          <a href="https://example.com/line" class="btn-ghost">
+            <span>LINEで相談したい</span>
+          </a>
+        </div>
+
+        <p style="margin-top:10px; font-size:11px; color:var(--text-muted);">
+          ※ 内容によっては、お受けできない場合もあります。その際も、理由を添えて正直にお伝えします。
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <div>オンライン便利屋 / 個人で静かに運営しています。</div>
+      <div style="margin-top:4px;">
+        お問い合わせ窓口：
+        <a href="#contact" class="link-underline">こちらからどうぞ</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
