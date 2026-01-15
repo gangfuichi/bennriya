@@ -25,14 +25,14 @@
       box-sizing: border-box;
     }
 
-    body {
-      margin: 0;
-      font-family: var(--font);
-      background: radial-gradient(circle at top, #1e293b 0, #020617 50%, #020617 100%);
-      color: var(--text);
-      line-height: 1.7;
-    }
-
+body {
+  margin: 0;
+  font-family: var(--font);
+  background: white;   /* ← ここだけ変更 */
+  color: var(--text);  /* ← 文字色はそのまま */
+  line-height: 1.7;
+  
+}
     a {
       color: inherit;
       text-decoration: none;
@@ -506,18 +506,24 @@
 
     <main>
       <!-- ヒーローセクション -->
-      <section class="hero" id="top">
-        <div class="hero-inner">
-          <div class="eyebrow">
-            <span class="eyebrow-dot"></span>
-            小さな「めんどう」を、オンラインで片付ける
-          </div>
-          <h1>PC作業・リサーチ・ちょっとした自動化まで。<br>初期費用を抑えたオンライン便利屋です。</h1>
-          <p class="hero-lead">
-            「調べるのが面倒」「時間はないけど、やりたいことはある」。<br>
-            そんなときに、裏方で quietly 動いて片付けるタイプの便利屋です。<br>
-            まずは内容ベースで相談いただき、可能な範囲・金額感を一緒に決めていきます。
-          </p>
+      \<section class="hero" id="top">
+  <div class="hero-inner">
+    <div class="eyebrow">
+      <span class="eyebrow-dot"></span>
+      小さな「めんどう」を、オンラインで片付ける
+    </div>
+
+    <!-- 写真をここに追加 -->
+    <img src="スクリーンショット 2025-11-08 152934.png" alt="説明" width="300" style="display:block; margin:24px auto; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+
+    <h1>PC作業・リサーチ・ちょっとした自動化まで。<br>初期費用を抑えたオンライン便利屋です。</h1>
+    <p class="hero-lead">
+      「調べるのが面倒」「時間はないけど、やりたいことはある」。<br>
+      そんなときに、裏方で quietly 動いて片付けるタイプの便利屋です。<br>
+      まずは内容ベースで相談いただき、可能な範囲・金額感を一緒に決めていきます。
+    </p>
+  </div>
+</section>
 
           <div class="hero-grid">
             <div>
